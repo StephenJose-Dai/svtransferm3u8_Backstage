@@ -24,5 +24,6 @@ mv m3u8.conf /usr/local/nginx/conf/v_hosts
    如果你是yum或者dnf安装的话，默认是在/etc/nginx下，我也会在conf下创建个v_hosts文件夹，将m3u8.conf移动到v_hosts里面，然后再到conf下把v_hosts下的m3u8.conf给引用到nginx.conf里面。
 
 # 支援
-如果有部署问题或者其他问题，可以联系作者支援
+如果有部署问题或者其他问题，可以联系作者支援  
+
 ![戴戴的Linux](ddlnxqrcimg.jpg)
