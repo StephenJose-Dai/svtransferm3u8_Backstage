@@ -12,16 +12,16 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
-UPLOAD_FOLDER = '/www/qiepian/uploads'
-OUTPUT_FOLDER = '/www/qiepian/output'
-BASE_URL = 'http://101.42.27.60:9630'
+UPLOAD_FOLDER = '/www/m3u8/uploads'
+OUTPUT_FOLDER = '/www/m3u8/output'
+BASE_URL = 'http://abc.com'
 
 db_config = {
     'host': '127.0.0.1',
     'user': 'root',
-    'password': '670677773@qq.com*',
+    'password': 'password',
     'database': 'm3u8info',
-    'port': '6999'
+    'port': '3306'
 }
 
 # 随机生成字符串用于文件名
