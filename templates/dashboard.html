@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>后台管理</title>
+    <script>
+        function confirmDeletion(fileId, row) {
+            if (confirm("确定要删除该文件吗？")) {
+                fetch(`/delete/${fileId}`, { method: 'POST' })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert("文件删除成功！");
+                        row.remove();
+                    } else {
+                        alert(data.error || "文件删除失败！");
+                    }
+                })
+                .catch(error => {
+                    console.error("删除请求失败:", error);
+                    alert("删除请求失败，请重试！");
+                });
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h2>上传记录</h2>
+        <table>
+            <tr>
+                <th>ID<div class="resizer"></div></th>
+                <th>IP地址<div class="resizer"></div></th>
+                <th>IP类型<div class="resizer"></div></th>
+                <th>上传时间<div class="resizer"></div></th>
+                <th>上传路径<div class="resizer"></div></th>
+                <th>文件名<div class="resizer"></div></th>
+                <th>浏览器UA<div class="resizer"></div></th>
+                <th>转换路径<div class="resizer"></div></th>
+                <th>M3U8链接<div class="resizer"></div></th>
+                <th>操作<div class="resizer"></div></th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ record[0] }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2] }}</td>
+                <td>{{ record[3] }}</td>
+                <td>{{ record[4] }}</td>
+                <td>{{ record[5] }}</td>
+                <td>{{ record[6] }}</td>
+                <td>{{ record[7] }}</td>
+                <td><a href="{{ record[8] }}">{{ record[8] }}</a></td>
+                <td>
+                    <button onclick="confirmDeletion({{ record[0] }}, this.closest('tr'))">删除</button><div class="resizer"></div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a href="{{ url_for('logout') }}">注销</a>
+    </div>
+	<script src="{{ url_for('static', filename='td.js') }}"></script>
+</body>
+</html>

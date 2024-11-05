@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>登录</title>
+    <script>
+        // 提示框的逻辑
+        function showAlert(message) {
+            alert(message);
+        }
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <h2>登录后台</h2>
+        <form method="POST" onsubmit="return handleSubmit();">
+            <label for="username">用户名:</label>
+            <input type="text" name="username" required>
+            <label for="password">密码:</label>
+            <input type="password" name="password" required>
+            <button type="submit">登录</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+            <script>
+                // 当有消息时，弹出提示框
+                showAlert("{{ messages[0] }}");
+            </script>
+          {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
